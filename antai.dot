@@ -1,0 +1,133 @@
+// 
+digraph antai {
+/*
+*
+at@matrix:~$ dot -Tpng antai.dot -o antai.png -Tcmapx -o antai.map
+
+node [fontname="Microsoft YaHei", fontsize = 11.0, height = 0.3,
+        style=filled,fillcolor=snow,
+        color=gray70,fontcolor=grey13,
+        shape = plaintext
+        ];
+*/
+
+	graph [label = "AT",
+		fontname = "Monaco",
+		fontsize = 13.0, fontcolor = snow,
+		labeljust = "l", labelloc = "b", center = 1,
+		ranksep = 0.1, center = 1, ratio = compress,
+		rankdir = LR, 
+		bgcolor = grey19
+		];
+
+	node [fontsize = 10.0, height = 0.3,
+		fontname = "Monaco",
+		style = "filled, setlinewidth(0.5)",fillcolor = grey19, color = gray, fontcolor = snow,
+		shape = plaintext
+		];
+
+	edge [//fontname="Microsoft YaHei", 
+		fontname = "Monaco",
+	    fontsize = 9.0, fontcolor = gray,
+		color = azure,
+		arrowsize = 0.6, arrowhead = vee, arrowtail = none,
+		style = "setlinewidth(0.5)"
+		];
+
+	root [label = "antai", shape = "component", URL="#"];
+
+	root -> hobby [style = "setlinewidth(3)", color = gold2, label = "hobby"];
+			hobby [label = "爱好", shape = tab]
+			hobby -> {website, gaming, music, hardware}[style="dotted"];
+						website [label = "网站收藏", shape = note, URL = "http://feedly.com/index.html#my"];
+						music [label = "音乐", shape = note, URL = "http://douban.fm/mine#!type=liked"];
+						gaming [label = "游戏", shape = component, color = yellow];
+						gaming -> {steam, video, indie}[style = "dashed", shape = folder, color = red];
+								steam[shape = note, URL = "http://steamcommunity.com/id/his1devil/home"];
+					    hardware [label = "硬件", shape = box3d];
+
+	root -> study [style = "setlinewidth(4)"];
+			study [label = "个人学习", shape = component];
+	study -> opencourse [style="setlinewidth(2)"];
+			 opencourse -> udacity [style = "setlinewidth(1)", color = yellow, label = "google背景"];
+			 			   udacity [shape = tab, URL = "https://www.udacity.com/"];
+			 			   udacity -> {frontend, android}[style = "dashed"];
+			 			   			  android [label = "Developing Android Apps", URL = "https://www.udacity.com/course/ud853", shape = underline];
+			 			   			  frontend [label = "Front-end web", URL = "https://www.udacity.com/course/nd001", shape = note];
+			 			   udacity -> hadoop [label = "大数据处理", style = "dashed"];
+			 			   			  hadoop [label = "Hadoop and MapReduce", URL = "https://www.udacity.com/course/ud617", shape = underline];
+			 			   udacity -> mongodb [label = "data manipulation and retrieval", color = brown1];
+			 			   			  mongodb [label = "MongoDB基础", URL = "https://www.udacity.com/course/ud032", shape = oval];
+
+			 opencourse -> coursera;
+			 			   coursera [style="setlinewidth(1)", color = green, URL="http://coursera.org/", shape = folder];
+			               coursera -> coursecs [label = "CS",style = "setlinewidth(0.8)",shape=folder];
+			               			   coursecs [label = "访问", shape = component];
+			               			 coursecs -> {algorithms crytography basicalgorithms csnetwork}[style="dotted", color = deepskyblue1];
+			               			 		algorithms [label = "算法分析", shape = note, URL = "https://class.coursera.org/algo-006/lecture", target = "_blank"];
+			               			 		crytography [label = "密码学", shape = note, URL = "https://www.coursera.org/course/cryptography"];
+			               			 		basicalgorithms [label = "基础算法", shape = note, URL = "https://www.coursera.org/course/algs4partII"];
+			               			 		csnetwork [label = "计算机网络", shape = note, URL = "https://www.coursera.org/course/comnetworks"];
+			 opencourse -> knownsecv2[label = "knownsecv2"];
+			 				knownsecv2 [label = "知道创宇研发技能表v2.2", URL = "http://blog.knownsec.com/Knownsec_RD_Checklist/v2.2.html", shape = note];
+			 opencourse -> cs50;
+			 opencourse -> pyalgorithmsdatastructure;
+
+
+	study -> reading [style = "setlinewidth(1)"];
+			 reading -> cs [label = "Computer Science", style = "setlinewidth(0.8)", color = blueviolet];
+			 			cs -> os [label = "OS", style = "setlinewidth(0.7)", shape = folder];
+			 			cs -> programming [label = "语言", style = "setlinewidth(0.6)", shape = folder];
+			 				  programming -> {js, htmlcss, c, python, php, java}[style = "dotted"];
+			 				  				 js [label = "javascript"];
+			 				  				 htmlcss [label = "html && css"];
+			 				  				 c [label = "C"];
+			 				  				 python [label = python];
+			 			cs -> webserver [label = "web && server"];
+			 			cs -> algorithmsds [label = "algorithms && data structure"];   
+
+			 reading -> thinking [label = "想法", style = "setlinewidth(1)", color = yellow];
+			 			thinking -> biography [label = "传记"];
+			 			thinking -> internet [label = "互联网"];
+			 			thinking -> english [label = "英文学习"];  
+
+	study -> writing [style = "setlinewidth(0.5)", color = "yellow"];
+	         writing [label = "写代码", shape = tab, URL = ""];
+	         writing -> walgorithms [style = "dotted", label = "搬迁中..."];
+	         			walgorithms [label = "算法学习", shape = note, URL = "http://evilat.com/blog/9.html"];
+
+
+    root -> note [style = "setlinewidth(1)"];
+    		note [label = "我的笔记", shape=folder];
+    		note -> vps;
+    		note -> flask;
+    		note -> sql;
+
+
+    root -> projects [style = "setlinewidth(1)"];
+    		projects -> github;
+    					github -> pagesio;
+    		projects -> bitbucket;
+
+
+    root -> tools [style = "setlinewidth(1)"];
+    		tools [label = "工具"];
+    		tools -> editor [label = "编辑器"];
+    				editor -> {pycharm, eclipse, sublimetext, coderunner, xcode}[style = "dotted"];
+    		tools -> {terminal, operationsystem}
+
+
+    root -> social [style = "setlinewidth(1)"];
+    		social -> Weibo[label = "微博"];
+    				  Weibo[shape = note, URL = "http://weibo.com/twistedsoul"];
+    		social -> Github;
+    		social -> Twitter;
+    				  Twitter [shape = note, URL = "http://twitter.com/callmefatmanplz"];
+    		social -> googleplus[label = "Google+"];
+    		social -> Zhihu;
+
+    root -> life[label = "life"];
+    		life [label = "生活"];
+
+
+}
